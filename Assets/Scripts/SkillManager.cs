@@ -39,7 +39,7 @@ public class SkillManager : MonoBehaviour
         pos.y += 1.5f;
         Instantiate(Skill_A, pos, Quaternion.Euler(0, 0, angle));
         canShoot_a = false;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.7f);
         canShoot_a = true;
     }
 

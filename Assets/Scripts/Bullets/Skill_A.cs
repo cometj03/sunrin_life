@@ -8,7 +8,7 @@ public class Skill_A : MonoBehaviour
 
     void Awake()
     {
-        speed = 10f;
+        speed = 12f;
     }
 
     void Update()
@@ -24,7 +24,8 @@ public class Skill_A : MonoBehaviour
         }
         else if (collision.tag == "Enemy")
         {
-
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(10f);
+            Destroy(gameObject);
         }
     }
 }

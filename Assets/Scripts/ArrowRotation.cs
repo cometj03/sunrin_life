@@ -19,7 +19,7 @@ public class ArrowRotation : MonoBehaviour
         Arrow_angle = 0;
         max = 70f;
         min = -70f;
-        angleSpeed = 80f;
+        angleSpeed = 90f;
         isLeft = true;
     }
 
