@@ -20,6 +20,7 @@ public class Skill_A : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-3f);
             Destroy(gameObject);
         }
         else if (collision.tag == "Enemy")

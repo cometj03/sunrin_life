@@ -5,29 +5,42 @@ using UnityEngine.UI;
 
 public class HPManager : MonoBehaviour
 {
-    Image img_hp;
+    Image HP_Gauge;
+    Text HP_Text;
     float hp, speed;
+    
     void Start()
     {
-        if (img_hp == null)
-            img_hp = gameObject.GetComponent<Image>();
-        hp = 70f;
-        speed = 5f;
+        if (HP_Gauge == null)
+            HP_Gauge = gameObject.GetComponent<Image>();
+        if (HP_Text == null)
+            HP_Text = gameObject.GetComponentInChildren<Text>();
+        hp = 6f;
+        speed = 7f;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        if (hp > 0)
-            hp -= Time.deltaTime * speed;
-        else
+        HP_Gauge.fillAmount = hp / 100;
+        speed = hp / 8;
+        if (hp >= 100)
         {
-            // 게임 오버
+            // Game Clear
+        }else if (hp >= 0)
+        {
+            hp -= Time.deltaTime * speed;
         }
-        img_hp.fillAmount = hp / 100;
+
+        HP_Text.text = hp.ToString("N0") + "%";
     }
 
     public void PlusHP(float d)
     {
-        hp += d;
+        if (hp + d > 0)
+            hp += d;
+        else
+        {
+            // Game Over
+        }
     }
 }

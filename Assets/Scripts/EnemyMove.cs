@@ -11,33 +11,57 @@ public class EnemyMove : MonoBehaviour
     Vector2 moveVector;
     float speed;
     
-    void Start()
+    Animator anim;
+    
+    void Awake()
     {
         howLong = 0f;
         point = Random.Range(0.0f, 4.0f);
         moveVector = Vector2.zero;
         speed = 4f;
+        anim = transform.GetComponent<Animator>();
     }
 
     void Update()
     {
         if (point > howLong)
         {
-            // TODO: 밖으로 나가지 못하게 코드 짜기
-            transform.Translate(moveVector * speed * Time.deltaTime);
+            // 밖으로 나가지 못하게
+            if (Mathf.Abs(transform.position.x) > 8)
+            {
+                if (state == State.left)
+                    state = State.right;
+                else if (state == State.right)
+                    state = State.left;
+            }
             howLong += Time.deltaTime;
         }
         else
         {
             howLong = 0;
             point = Random.Range(0.0f, 4.0f);
-            /*switch (Random.Range(0, 3))
+            switch (Random.Range(0, 4) % 3)
             {
-                case 0: state = State.left; break;
-                case 1: state = State.stop; break;
+                case 0: state = State.stop; break;
+                case 1: state = State.left; break;
                 case 2: state = State.right; break;
-            }*/
-            moveVector.x = Random.Range(-1, 2);
+            }
+            anim.SetBool("isWalk", !(state == State.stop));
         }
+
+        if (state == State.left)
+        {
+            moveVector.x = -1;
+            transform.localScale = new Vector3(0.22f, 0.22f, 0);
+        }
+        else if (state == State.right)
+        {
+            moveVector.x = 1;
+            transform.localScale = new Vector3(-0.22f, 0.22f, 0);
+        }
+        else if (state == State.stop)
+            moveVector.x = 0;
+
+        transform.Translate(moveVector * speed * Time.deltaTime);        
     }
 }

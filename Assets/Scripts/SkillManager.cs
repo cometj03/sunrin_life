@@ -7,7 +7,7 @@ public class SkillManager : MonoBehaviour
     public GameObject Player;
     public GameObject Skill_A;
     
-    private bool canShoot_a;
+    private float cool_a, cool_b;
     public bool playerMoveable, arrowMoveable;
     private float angle;
 
@@ -17,7 +17,8 @@ public class SkillManager : MonoBehaviour
     {
         if (Player == null)
             Player = GameObject.Find("Player");
-        canShoot_a = true;
+        cool_a = 0;
+        cool_b = 0;
         playerMoveable = true;
         arrowMoveable = true;
         angle = 0;
@@ -25,25 +26,48 @@ public class SkillManager : MonoBehaviour
 
     void Update()
     {
-        angle = Player.gameObject.GetComponent<ArrowRotation>().Arrow_angle;
-        if (Input.GetKeyDown(KeyCode.Q) && canShoot_a)
+        // 스킬 A 쿨타임
+        if (cool_a <= 0)
         {
-            StartCoroutine("SpawnA");
-            StartCoroutine("Pause");
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                SpawnA();
+                StartCoroutine("Pause");
+                cool_a = 0.7f;
+            }
+        }else
+        {
+            cool_a -= Time.deltaTime;
+        }
+
+        // 스킬 B 쿨타임
+        if (cool_b <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Player.GetComponent<PlayerMove>().Flash();
+                cool_b = 5.0f;
+            }
+        }else
+        {
+            cool_b -= Time.deltaTime;
         }
     }
 
-    IEnumerator SpawnA()
+    private void FixedUpdate()
+    {
+        // Arrow_angle 값 받아오기
+        angle = Player.GetComponent<ArrowRotation>().Arrow_angle;
+    }
+
+    private void SpawnA()
     {
         Vector3 pos = Player.transform.position;
         pos.y += 1.5f;
         Instantiate(Skill_A, pos, Quaternion.Euler(0, 0, angle));
-        canShoot_a = false;
-        yield return new WaitForSeconds(0.7f);
-        canShoot_a = true;
     }
 
-    // 0.1s pause moving
+    // 0.2s pause moving
     IEnumerator Pause()
     {
         playerMoveable = false;
