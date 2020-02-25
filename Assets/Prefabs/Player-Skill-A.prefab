@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7812391140863840285}
   - component: {fileID: -5021764931276547324}
   m_Layer: 0
-  m_Name: Skill_A
+  m_Name: Player-Skill-A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561986268efb114449510ba25656a3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Particle_A: {fileID: 2489009492519233276, guid: 6aedc3bf93de9c5418f8512e19dfc7df,
+    type: 3}
 --- !u!70 &7812391140863840285
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

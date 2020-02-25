@@ -516,7 +516,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 41bc9515d38296a469a7c4dacbf94bc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1199,7 +1199,7 @@ Canvas:
   m_GameObject: {fileID: 1865420711}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 2129199481}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1209,7 +1209,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!224 &1865420715
 RectTransform:
@@ -1310,7 +1310,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 92ea6831ea23cb743b12468aa4064f66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1378,8 +1378,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.7849406, y: 0.32131565}
-  m_Size: {x: 6.117475, y: 15.980528}
+  m_Offset: {x: 0.3475265, y: 0.029708039}
+  m_Size: {x: 6.020272, y: 15.397312}
   m_Direction: 0
 --- !u!50 &1929503199
 Rigidbody2D:
@@ -1461,7 +1461,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: c09d48de92005f447a863ec0af6c80a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1519,8 +1519,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4898388, y: -0.04143173}
-  m_Size: {x: 6.2886863, y: 15.510214}
+  m_Offset: {x: 0.4898388, y: 1.0764056}
+  m_Size: {x: 6.2886863, y: 13.274533}
   m_Direction: 0
 --- !u!50 &2018118360
 Rigidbody2D:
