@@ -1555,7 +1555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ada44862455ed4686b9338c37a272a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deg: 0
   Enemy_Skill_A: {fileID: 4337188521177136319, guid: 87d2ad07d8173144b99ae48a5f107ed2,
     type: 3}
 --- !u!1 &2129199479
