@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    GameObject SkillManager;
+    GameObject GameManager;
     public float speed;
     public bool canMove;
     private Vector2 moveVector;
@@ -14,8 +14,8 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        if (SkillManager == null)
-            SkillManager = GameObject.Find("SkillManager");
+        if (GameManager == null)
+            GameManager = GameObject.Find("GameManager");
         speed = 4f;
         moveVector = Vector2.zero;
         dir = 0;
@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("isWalk", !(h == 0));
         
         // 움직일 수 있는지
-        if (canMove && SkillManager.gameObject.GetComponent<SkillManager>().playerMoveable)
+        if (canMove && GameManager.GetComponent<SkillManager>().playerMoveable)
             transform.Translate(moveVector * speed * Time.deltaTime);
     }
 

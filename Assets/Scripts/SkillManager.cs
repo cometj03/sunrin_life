@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillManager : MonoBehaviour
 {
     public GameObject Player;
-    public GameObject Skill_A;
+    public GameObject Player_Skill_A;
     
     private float cool_a, cool_b;
     public bool playerMoveable, arrowMoveable;
@@ -31,8 +31,8 @@ public class SkillManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                SpawnA();
-                StartCoroutine("Pause");
+                Player_Spawn_A();
+                StartCoroutine(Pause(0.2f));
                 cool_a = 0.7f;
             }
         }else
@@ -60,19 +60,19 @@ public class SkillManager : MonoBehaviour
         angle = Player.GetComponent<ArrowRotation>().Arrow_angle;
     }
 
-    private void SpawnA()
+    private void Player_Spawn_A()
     {
-        Vector3 pos = Player.transform.position;
+        Vector2 pos = Player.transform.position;
         pos.y += 1.5f;
-        Instantiate(Skill_A, pos, Quaternion.Euler(0, 0, angle));
+        Instantiate(Player_Skill_A, pos, Quaternion.Euler(0, 0, angle));
     }
 
-    // 0.2s pause moving
-    IEnumerator Pause()
+    // pause moving
+    IEnumerator Pause(float time)
     {
         playerMoveable = false;
         arrowMoveable = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(time);
         playerMoveable = true;
         arrowMoveable = true;
     }

@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    public GameObject Enemy_Skill_A;
+    GameObject Player;
     enum State { left, stop, right };
     State state = State.stop;
 
     float howLong, point;
     Vector2 moveVector;
     float speed;
-    
+
     Animator anim;
+    float cool_a, coolTimer;
     
     void Awake()
     {
+        if (Player == null)
+            Player = GameObject.Find("Player");
         howLong = 0f;
         point = Random.Range(0.0f, 4.0f);
         moveVector = Vector2.zero;
         speed = 4f;
+
         anim = transform.GetComponent<Animator>();
+
+        cool_a = Random.Range(1.0f, 6.0f);
+        coolTimer = 0f;
     }
 
     void Update()
     {
+        // 이동 코드
         if (point > howLong)
         {
             // 밖으로 나가지 못하게
@@ -40,11 +50,11 @@ public class EnemyMove : MonoBehaviour
         {
             howLong = 0;
             point = Random.Range(0.0f, 4.0f);
-            switch (Random.Range(0, 4) % 3)
+            switch (Random.Range(1, 4))
             {
-                case 0: state = State.stop; break;
-                case 1: state = State.left; break;
-                case 2: state = State.right; break;
+                case 1: state = State.stop; break;
+                case 2: state = State.left; break;
+                case 3: state = State.right; break;
             }
             anim.SetBool("isWalk", !(state == State.stop));
         }
@@ -60,8 +70,41 @@ public class EnemyMove : MonoBehaviour
             transform.localScale = new Vector3(-0.22f, 0.22f, 0);
         }
         else if (state == State.stop)
+        {
             moveVector.x = 0;
+        }
 
-        transform.Translate(moveVector * speed * Time.deltaTime);        
+        transform.Translate(moveVector * speed * Time.deltaTime);
+
+        // 스킬 발사 코드
+        if (coolTimer < cool_a)
+        {
+            coolTimer += Time.deltaTime;
+        }
+        else
+        {
+            Vector2 pos = transform.position;
+            Vector2 playerPos = Player.transform.position;
+            pos.y -= 1.5f;
+            float angle = -1 * getAngle(pos.x, pos.y, playerPos.x, playerPos.y);
+            Enemy_Spawn_A(pos, angle + Random.Range(-30.0f, 30.0f));
+
+            cool_a = Random.Range(2.5f, 7.0f);
+            coolTimer = 0f;
+        }
+    }
+
+    private void Enemy_Spawn_A(Vector2 pos, float angle)
+    {
+        Instantiate(Enemy_Skill_A, pos, Quaternion.Euler(0, 0, angle));
+    }
+
+    private float getAngle(float x1, float y1, float x2, float y2)
+    {
+        float dx = x1 - x2, dy = y1 - y2;
+        float rad = Mathf.Atan2(dx, dy);
+        float degree = rad * Mathf.Rad2Deg;
+
+        return degree;
     }
 }
