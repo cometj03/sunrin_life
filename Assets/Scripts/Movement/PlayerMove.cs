@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    GameObject GameManager;
+    GameObject SkillManager;
     public float speed;
     public bool canMove;
     private Vector2 moveVector;
-    float dir;
+
+    // 바라보고 있는 방향 (1 : right, -1 : left)
+    public float dir;
 
     Animator anim;
 
     void Awake()
     {
-        if (GameManager == null)
-            GameManager = GameObject.Find("GameManager");
+        if (SkillManager == null)
+            SkillManager = GameObject.Find("SkillManager");
         speed = 4f;
         moveVector = Vector2.zero;
         dir = 0;
@@ -43,9 +45,10 @@ public class PlayerMove : MonoBehaviour
         }
         // 애니메이션 제어
         anim.SetBool("isWalk", !(h == 0));
-        
+
+        canMove = GameManager.instance.gameState == 1 ? true : false;
         // 움직일 수 있는지
-        if (canMove && GameManager.GetComponent<SkillManager>().playerMoveable)
+        if (canMove && SkillManager.GetComponent<SkillManager>().playerMoveable)
             transform.Translate(moveVector * speed * Time.deltaTime);
     }
 

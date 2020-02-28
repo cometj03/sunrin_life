@@ -24,24 +24,29 @@ public class HPManager : MonoBehaviour
     {
         HP_Gauge.fillAmount = hp / 100;
         speed = difficulty * hp / 100;
-        if (hp >= 100)
-        {
-            // Game Clear
-        }else if (hp >= 0)
+        if (hp >= 0)
         {
             hp -= Time.deltaTime * speed;
         }
-
-        HP_Text.text = hp.ToString("N0") + "%";
+        if (GameManager.instance.gameState == 1)
+            HP_Text.text = hp.ToString("N0") + "%";
     }
 
     public void PlusHP(float d)
     {
         if (hp + d > 0)
+        {
+            if (hp >= 100)
+            {
+                HP_Text.text = "Game Clear!";
+            }
             hp += d;
+        }
         else
         {
             // Game Over
+            HP_Text.text = "GameOver";
+            GameManager.instance.GameOver();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowRotation : MonoBehaviour
 {
-    GameObject Arrow, GameManager;
+    GameObject Arrow, SkillManager;
     public float Arrow_angle;
     float max, min;
     public float angleSpeed;
@@ -14,8 +14,8 @@ public class ArrowRotation : MonoBehaviour
     {
         if (Arrow == null)
             Arrow = GameObject.Find("Arrow");
-        if (GameManager == null)
-            GameManager = GameObject.Find("GameManager");
+        if (SkillManager == null)
+            SkillManager = GameObject.Find("SkillManager");
         Arrow_angle = 0;
         max = 70f;
         min = -70f;
@@ -37,7 +37,7 @@ public class ArrowRotation : MonoBehaviour
                 isLeft = true;
         }
         // 좌우 움직임
-        if (GameManager.GetComponent<SkillManager>().arrowMoveable)
+        if (SkillManager.GetComponent<SkillManager>().arrowMoveable)
             Arrow_angle += (isLeft ? -1 : 1) * angleSpeed * Time.deltaTime;
         
         Arrow.gameObject.transform.eulerAngles = new Vector3(0, 0, Arrow_angle);

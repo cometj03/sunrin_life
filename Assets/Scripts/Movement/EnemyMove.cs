@@ -37,13 +37,10 @@ public class EnemyMove : MonoBehaviour
         if (point > howLong)
         {
             // 밖으로 나가지 못하게
-            if (Mathf.Abs(transform.position.x) > 8)
-            {
-                if (state == State.left)
-                    state = State.right;
-                else if (state == State.right)
-                    state = State.left;
-            }
+            if (state == State.left && transform.position.x < -8)
+                state = State.right;
+            else if (state == State.right && transform.position.x > 8)
+                state = State.left;
             howLong += Time.deltaTime;
         }
         else
@@ -58,6 +55,8 @@ public class EnemyMove : MonoBehaviour
             }
             anim.SetBool("isWalk", !(state == State.stop));
         }
+
+        state = GameManager.instance.gameState == 1 ? state : State.stop;
 
         if (state == State.left)
         {
@@ -81,13 +80,15 @@ public class EnemyMove : MonoBehaviour
         {
             coolTimer += Time.deltaTime;
         }
-        else
+        else if (GameManager.instance.gameState == 1)
         {
             Vector2 pos = transform.position;
             Vector2 playerPos = Player.transform.position;
             pos.y -= 1.5f;
             float angle = -1 * getAngle(pos.x, pos.y, playerPos.x, playerPos.y);
-            Enemy_Spawn_A(pos, angle + Random.Range(-30.0f, 30.0f));
+
+            float dir = Player.GetComponent<PlayerMove>().dir;  // 플레이어가 바라보고 있는 방향
+            Enemy_Spawn_A(pos, angle + Random.Range(-10.0f, 25.0f) * dir);
 
             cool_a = Random.Range(2.5f, 7.0f);
             coolTimer = 0f;
