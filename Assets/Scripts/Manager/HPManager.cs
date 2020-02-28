@@ -28,7 +28,8 @@ public class HPManager : MonoBehaviour
         {
             hp -= Time.deltaTime * speed;
         }
-        if (GameManager.instance.gameState == 1)
+
+        if (GameManager.instance.gameState == GameState.Progressing)
             HP_Text.text = hp.ToString("N0") + "%";
     }
 
@@ -38,6 +39,7 @@ public class HPManager : MonoBehaviour
         {
             if (hp >= 100)
             {
+                GameManager.instance.gameState = GameState.Clear;
                 HP_Text.text = "Game Clear!";
             }
             hp += d;
@@ -45,7 +47,8 @@ public class HPManager : MonoBehaviour
         else
         {
             // Game Over
-            HP_Text.text = "GameOver";
+            GameManager.instance.gameState = GameState.Over;
+            HP_Text.text = "GameOver!";
             GameManager.instance.GameOver();
         }
     }

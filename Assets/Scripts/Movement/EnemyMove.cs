@@ -56,7 +56,7 @@ public class EnemyMove : MonoBehaviour
             anim.SetBool("isWalk", !(state == State.stop));
         }
 
-        state = GameManager.instance.gameState == 1 ? state : State.stop;
+        state = GameManager.instance.gameState == GameState.Progressing ? state : State.stop;
 
         if (state == State.left)
         {
@@ -80,7 +80,7 @@ public class EnemyMove : MonoBehaviour
         {
             coolTimer += Time.deltaTime;
         }
-        else if (GameManager.instance.gameState == 1)
+        else if (GameManager.instance.gameState == GameState.Progressing)
         {
             Vector2 pos = transform.position;
             Vector2 playerPos = Player.transform.position;

@@ -3,25 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Stage
+{
+    StartScene,
+    inMenu
+}
 public enum GameState
 {
-    Menu,
-    inGame,
-    GameOver
-}
-public enum GameStage
-{
-
+    Progressing,
+    Clear,
+    Over
 }
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int gameState;   // 0: 게임 오버, 1: 진행중, 2: 게임 클리어
+    public GameState gameState;
+    public Stage stageScene;
     public int level;
-    public GameObject curtain;
 
+    GameObject curtain;
     public float time, _fadeTime;
 
     private void Awake()
@@ -29,17 +31,17 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
         //DontDestroyOnLoad(gameObject);
+        if (curtain == null)
+            curtain = GameObject.Find("curtain");
         time = 0f;
         _fadeTime = 1f;
-        gameState = 1;
-        
-        //testText = GameObject.Find("testText").GetComponent<Text>();
-        //testText.text = "level:" + level.ToString();
+        gameState = GameState.Progressing;
+        stageScene = Stage.StartScene;
     }
 
     private void Start()
     {
-        StartGame();
+
     }
 
     public void StartGame()
@@ -49,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameState = 0;
+        gameState = GameState.Over;
         StartCoroutine(FadeIn());
     }
 

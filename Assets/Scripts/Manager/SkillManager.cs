@@ -52,10 +52,7 @@ public class SkillManager : MonoBehaviour
         {
             cool_b -= Time.deltaTime;
         }
-    }
-
-    private void FixedUpdate()
-    {
+        
         // Arrow_angle 값 받아오기
         angle = Player.GetComponent<ArrowRotation>().Arrow_angle;
     }
