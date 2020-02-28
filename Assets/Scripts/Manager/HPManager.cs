@@ -22,27 +22,31 @@ public class HPManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HP_Gauge.fillAmount = hp / 100;
-        speed = difficulty * hp / 100;
-        if (hp >= 0)
-        {
-            hp -= Time.deltaTime * speed;
-        }
-
         if (GameManager.instance.gameState == GameState.Progressing)
+        {
+            HP_Gauge.fillAmount = hp / 100;
+            speed = difficulty * hp / 100;
+            if (hp >= 0)
+            {
+                hp -= Time.deltaTime * speed;
+            }
+
             HP_Text.text = hp.ToString("N0") + "%";
+        }
     }
 
     public void PlusHP(float d)
     {
         if (hp + d > 0)
         {
+            hp += d;
             if (hp >= 100)
             {
+                // Game Clear
                 GameManager.instance.gameState = GameState.Clear;
                 HP_Text.text = "Game Clear!";
+                GameManager.instance.GameClear();
             }
-            hp += d;
         }
         else
         {

@@ -39,7 +39,7 @@ public class Player_Skill_A : MonoBehaviour
             GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(16f);
             Vector2 pos = collision.transform.position;
             pos.y = transform.position.y + 0.5f;
-            var clone = Instantiate(Particle_A, pos, Quaternion.Euler(0, 0, angle + 75f));
+            var clone = Instantiate(Particle_A, pos, Quaternion.Euler(0, 0, angle));
             Destroy(clone, 1.0f);
             Destroy(gameObject);
         }

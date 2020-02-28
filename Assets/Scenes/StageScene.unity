@@ -2479,7 +2479,7 @@ GameObject:
   - component: {fileID: 1905608897}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2499,6 +2499,7 @@ MonoBehaviour:
   gameState: 0
   stageScene: 0
   level: 0
+  curtain: {fileID: 1149427750}
   time: 0
   _fadeTime: 0
 --- !u!4 &1905608898

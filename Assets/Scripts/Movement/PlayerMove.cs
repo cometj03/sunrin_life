@@ -47,7 +47,7 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("isWalk", !(h == 0));
 
         // 게임 진행중 여부
-        canMove = GameManager.instance.gameState == GameState.Progressing ? true : false;
+        canMove = GameManager.instance.gameState == GameState.Progressing ? canMove : false;
 
         // 움직일 수 있는지
         if (canMove && SkillManager.GetComponent<SkillManager>().playerMoveable)

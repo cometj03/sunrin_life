@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum Stage
 {
@@ -23,16 +23,14 @@ public class GameManager : MonoBehaviour
     public Stage stageScene;
     public int level;
 
-    GameObject curtain;
+    public GameObject curtain;
     public float time, _fadeTime;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
-        //DontDestroyOnLoad(gameObject);
-        if (curtain == null)
-            curtain = GameObject.Find("curtain");
+        DontDestroyOnLoad(gameObject);
         time = 0f;
         _fadeTime = 1f;
         gameState = GameState.Progressing;
@@ -41,7 +39,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        /*GameObject[] gm = GameObject.FindGameObjectsWithTag("GameManager");
+        for (int i = 1; gm[i] != null; i++)
+            Destroy(gm[i]);*/
     }
 
     public void StartGame()
@@ -55,13 +55,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(FadeIn());
     }
 
-    public void ClearGame()
+    public void GameClear()
     {
-
+        StartCoroutine(FadeIn());
     }
 
     IEnumerator FadeOut()
     {
+        if (curtain == null)
+            curtain = GameObject.Find("curtain");
         while (time < _fadeTime)
         {
             curtain.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1f - time / _fadeTime);
@@ -75,6 +77,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator FadeIn()
     {
+        if (curtain == null)
+            curtain = GameObject.Find("curtain");
         while (time < 1.5f)
         {
             curtain.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, time / 1.5f);
@@ -83,7 +87,7 @@ public class GameManager : MonoBehaviour
         }
         curtain.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 1);
         time = 0;
+        SceneManager.LoadScene("StageScene");
         yield return null;
     }
-
 }

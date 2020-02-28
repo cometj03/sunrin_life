@@ -146,6 +146,7 @@ public class StageManager : MonoBehaviour
 
     public void GotoInGame()
     {
+        GameManager.instance.gameState = GameState.Progressing;
         SceneManager.LoadScene("InGame");
     }
 }
