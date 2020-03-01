@@ -6,8 +6,9 @@ public class SkillManager : MonoBehaviour
 {
     public GameObject Player;
     public GameObject Player_Skill_A;
+    public GameObject Player_Skill_B;
     
-    private float cool_a, cool_b;
+    private float cool_a, cool_b, cool_c;
     public bool playerMoveable, arrowMoveable;
     private float angle;
 
@@ -19,6 +20,7 @@ public class SkillManager : MonoBehaviour
             Player = GameObject.Find("Player");
         cool_a = 0;
         cool_b = 0;
+        cool_c = 0;
         playerMoveable = true;
         arrowMoveable = true;
         angle = 0;
@@ -33,9 +35,9 @@ public class SkillManager : MonoBehaviour
             {
                 Player_Spawn_A();
                 StartCoroutine(Pause(0.2f));
-                cool_a = 0.7f;
+                cool_a = 1.7f;
             }
-        }else
+        } else
         {
             cool_a -= Time.deltaTime;
         }
@@ -43,14 +45,28 @@ public class SkillManager : MonoBehaviour
         // 스킬 B 쿨타임
         if (cool_b <= 0)
         {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Player_Spawn_B();
+                StartCoroutine(Pause(0.5f));
+                cool_b = 5.7f;
+            }
+        } else
+        {
+            cool_b -= Time.deltaTime;
+        }
+
+        // 스킬 C 쿨타임
+        if (cool_c <= 0)
+        {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Player.GetComponent<PlayerMove>().Flash();
-                cool_b = 5.0f;
+                cool_c = 3.7f;
             }
-        }else
+        } else
         {
-            cool_b -= Time.deltaTime;
+            cool_c -= Time.deltaTime;
         }
         
         // Arrow_angle 값 받아오기
@@ -72,5 +88,12 @@ public class SkillManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         playerMoveable = true;
         arrowMoveable = true;
+    }
+
+    private void Player_Spawn_B()
+    {
+        Vector2 pos = Player.transform.position;
+        pos.y += 1.5f;
+        Instantiate(Player_Skill_B, pos, Quaternion.Euler(0, 0, angle));
     }
 }

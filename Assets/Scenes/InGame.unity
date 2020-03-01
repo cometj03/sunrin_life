@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Stick: {fileID: 0}
+  JoyVec: {x: 0, y: 0}
 --- !u!1 &578005500
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +533,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1929503192}
   Player_Skill_A: {fileID: 6332388350340300168, guid: df79389177a6368429fc848edd954056,
+    type: 3}
+  Player_Skill_B: {fileID: 3980621169659543861, guid: 85b8ebcdc91882d47bb59beb051a5db4,
     type: 3}
   playerMoveable: 0
   arrowMoveable: 0
@@ -950,7 +953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   stageScene: 0
-  level: 0
   curtain: {fileID: 0}
   time: 0
   _fadeTime: 0
@@ -1643,6 +1645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   canMove: 0
+  isJoyStick: 0
   dir: 0
 --- !u!114 &1929503197
 MonoBehaviour:

@@ -16,7 +16,7 @@ public class StageManager : MonoBehaviour
         numStage = 0;
         _numStage = 3;
         openedPanel = false;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -100,7 +100,7 @@ public class StageManager : MonoBehaviour
         while (time < 2f)
         {
             stages[numStage].transform.position = pos;
-            pos = Vector3.Lerp(pos, target, Time.deltaTime * (time + 1.5f));
+            pos = Vector3.Lerp(pos, target, Time.deltaTime * (time + 2.5f));
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

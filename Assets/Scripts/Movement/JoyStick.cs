@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public Transform Stick;    // 조이스틱
-    public Vector2 JoyVec;
+    public Transform Stick; // 조이스틱
+    public Vector2 JoyVec;  // 조이스틱의 방향 (단위 벡터)
 
     private Vector2 StickFirstPos;
     private Vector2 currentPos;
@@ -34,7 +34,6 @@ public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerDo
         // < 드래그 중 >
         currentPos.x = Input.mousePosition.x;
         
-        // 조이스틱의 방향
         JoyVec = (currentPos - StickFirstPos).normalized;
         
         float Dis = Mathf.Abs(currentPos.x - StickFirstPos.x);
@@ -53,7 +52,7 @@ public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerDo
 
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
-        // < 터치 >
+        // < 터치 시작 >
         currentPos.x = Input.mousePosition.x;
         JoyVec = (currentPos - StickFirstPos).normalized;
         Stick.transform.position = currentPos;

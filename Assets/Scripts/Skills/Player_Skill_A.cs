@@ -18,13 +18,10 @@ public class Player_Skill_A : MonoBehaviour
 
     void Update()
     {
-        transform.position += transform.up * speed * Time.deltaTime;
-    }
-
-    private void FixedUpdate()
-    {
         // Arrow_angle 값 받아오기
         angle = Player.GetComponent<ArrowRotation>().Arrow_angle;
+
+        transform.position += transform.up * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,9 +31,9 @@ public class Player_Skill_A : MonoBehaviour
             GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-3f);
             Destroy(gameObject);
         }
-        else if (collision.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(16f);
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(12f);
             Vector2 pos = collision.transform.position;
             pos.y = transform.position.y + 0.5f;
             var clone = Instantiate(Particle_A, pos, Quaternion.Euler(0, 0, angle));

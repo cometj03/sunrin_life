@@ -26,5 +26,10 @@ public class Enemy_Skill_A : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.tag == "Shield")
+        {
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(8f);
+            Destroy(gameObject);
+        }
     }
 }
