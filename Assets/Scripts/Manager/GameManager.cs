@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
 
     public GameState gameState;
     public Stage stageScene;
-    public int level;
 
     public GameObject curtain;
     public float time, _fadeTime;
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         time = 0f;
         _fadeTime = 1f;
         gameState = GameState.Progressing;

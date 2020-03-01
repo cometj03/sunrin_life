@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     GameObject SkillManager;
+    GameObject JoyStick;
     public float speed;
-    public bool canMove;
+    public bool canMove, isJoyStick;
     private Vector2 moveVector;
 
     // 바라보고 있는 방향 (1 : right, -1 : left)
@@ -18,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (SkillManager == null)
             SkillManager = GameObject.Find("SkillManager");
+        if (JoyStick == null)
+            JoyStick = GameObject.Find("JoyStick_BackGround");
         speed = 4f;
         moveVector = Vector2.zero;
         dir = 0;
@@ -27,7 +30,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        float h;
+        if (isJoyStick)
+            h = JoyStick.GetComponent<JoyStick>().JoyVec.x;
+        else
+            h = Input.GetAxisRaw("Horizontal");
         float PlayerX = transform.position.x;
         canMove = true;
         moveVector.x = h;

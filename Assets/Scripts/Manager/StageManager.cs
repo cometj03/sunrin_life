@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
         numStage = 0;
         _numStage = 3;
         openedPanel = false;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

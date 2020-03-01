@@ -16,7 +16,7 @@ public class HPManager : MonoBehaviour
             HP_Gauge = gameObject.GetComponent<Image>();
         if (HP_Text == null)
             HP_Text = gameObject.GetComponentInChildren<Text>();
-        hp = 20f;
+        hp = 80f;
         difficulty = 6f;
     }
 
