@@ -10,6 +10,7 @@ public enum Stage
 }
 public enum GameState
 {
+    NotStarted,
     Progressing,
     Clear,
     Over
@@ -32,7 +33,6 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
         time = 0f;
         _fadeTime = 1f;
-        gameState = GameState.Progressing;
         stageScene = Stage.StartScene;
     }
 
@@ -41,22 +41,29 @@ public class GameManager : MonoBehaviour
         /*GameObject[] gm = GameObject.FindGameObjectsWithTag("GameManager");
         for (int i = 1; gm[i] != null; i++)
             Destroy(gm[i]);*/
+        if (SceneManager.GetActiveScene().name == "InGame")
+            gameState = GameState.Progressing;
     }
 
-    public void StartGame()
+    public void _FadeOut()
     {
         StartCoroutine(FadeOut());
+    }
+    public void _FadeIn()
+    {
+        StartCoroutine(FadeIn());
     }
 
     public void GameOver()
     {
         gameState = GameState.Over;
-        StartCoroutine(FadeIn());
+        _FadeIn();
     }
 
     public void GameClear()
     {
-        StartCoroutine(FadeIn());
+        gameState = GameState.Clear;
+        _FadeIn();
     }
 
     IEnumerator FadeOut()

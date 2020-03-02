@@ -28,12 +28,12 @@ public class Player_Skill_A : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-3f);
+            //GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-3f);
             Destroy(gameObject);
         }
         if (collision.tag == "Enemy")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(12f);
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(8f);
             Vector2 pos = collision.transform.position;
             pos.y = transform.position.y + 0.5f;
             var clone = Instantiate(Particle_A, pos, Quaternion.Euler(0, 0, angle));

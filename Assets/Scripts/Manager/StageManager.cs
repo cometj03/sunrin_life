@@ -21,11 +21,14 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.stageScene = Stage.StartScene;
-
         for (int i = 0; i < 4; i++)
             stages[i].SetActive(false);
         stages[numStage].SetActive(true);
+        if (GameManager.instance.stageScene == Stage.StartScene)
+            StartPanel.SetActive(true);
+        else
+            StartPanel.SetActive(false);
+        
     }
 
     void Update()
@@ -35,8 +38,8 @@ public class StageManager : MonoBehaviour
             if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
             {
                 StartPanel.SetActive(false);
-                AlertPanel.SetActive(false);
-                GameManager.instance.StartGame();
+                CloseAlertPanel();
+                GameManager.instance._FadeOut();
                 GameManager.instance.stageScene = Stage.inMenu;
             }
             else if (Application.platform == RuntimePlatform.Android && Input.GetKeyDown(KeyCode.Escape))
@@ -46,6 +49,7 @@ public class StageManager : MonoBehaviour
         }
         else if (GameManager.instance.stageScene == Stage.inMenu)
         {
+            StartPanel.SetActive(false);
             if (Application.platform == RuntimePlatform.Android && Input.GetKeyDown(KeyCode.Escape))
             {
                 if (openedPanel)

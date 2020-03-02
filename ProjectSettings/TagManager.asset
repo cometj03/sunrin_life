@@ -9,6 +9,7 @@ TagManager:
   - GameManager
   - EnemySkill
   - Shield
+  - Player_Skill_A
   layers:
   - Default
   - TransparentFX
