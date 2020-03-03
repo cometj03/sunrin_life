@@ -27,6 +27,7 @@ public class PlayerMove : MonoBehaviour
 
         anim = transform.GetComponent<Animator>();
         isJoyStick = true;
+        dir = -1;
     }
 
     void Update()

@@ -50,13 +50,13 @@ public class SkillManager : MonoBehaviour
                 Player_Spawn_A();
                 StartCoroutine(Pause(0.2f));
                 time_a = cool_a;
-                shot_a = false;
             }
             buttonA.image.fillAmount = 1;
         } else
         {
             time_a -= Time.deltaTime;
             buttonA.image.fillAmount = 1 - time_a / cool_a;
+            shot_a = false;
         }
 
         // 스킬 B 관리
@@ -67,11 +67,13 @@ public class SkillManager : MonoBehaviour
                 Player_Spawn_B();
                 StartCoroutine(Pause(0.5f));
                 time_b = cool_b;
-                shot_b = false;
             }
+            buttonB.image.fillAmount = 1;
         } else
         {
             time_b -= Time.deltaTime;
+            buttonB.image.fillAmount = 1 - time_b / cool_b;
+            shot_b = false;
         }
 
         // 스킬 C 관리
@@ -81,11 +83,13 @@ public class SkillManager : MonoBehaviour
             {
                 Player.GetComponent<PlayerMove>().Flash();
                 time_c = cool_c;
-                shot_c = false;
             }
+            buttonC.image.fillAmount = 1;
         } else
         {
             time_c -= Time.deltaTime;
+            buttonC.image.fillAmount = 1 - time_c / cool_c;
+            shot_c = false;
         }
 
         // 스킬 D 관리
@@ -94,35 +98,37 @@ public class SkillManager : MonoBehaviour
             if (shot_d || Input.GetKeyDown(KeyCode.R))
             {
                 Player_Spawn_D();
-                StartCoroutine(Pause(0.1f));
+                StartCoroutine(Pause(0.2f));
                 time_d = cool_d;
-                shot_d = false;
             }
+            buttonD.image.fillAmount = 1;
         } else
         {
             time_d -= Time.deltaTime;
+            buttonD.image.fillAmount = 1 - time_d / cool_d;
+            shot_d = false;
         }
     }
 
     // 버튼 클릭
     public void OnBtnClick_A()
     {
-        if (!shot_a && Time.timeScale == 1)
+        if (Time.timeScale == 1)
             shot_a = true;
     }
     public void OnBtnClick_B()
     {
-        if (!shot_b && Time.timeScale == 1)
+        if (Time.timeScale == 1)
             shot_b = true;
     }
     public void OnBtnClick_C()
     {
-        if (!shot_c && Time.timeScale == 1)
+        if (Time.timeScale == 1)
             shot_c = true;
     }
     public void OnBtnClick_D()
     {
-        if (!shot_d && Time.timeScale == 1)
+        if (Time.timeScale == 1)
             shot_d = true;
     }
 

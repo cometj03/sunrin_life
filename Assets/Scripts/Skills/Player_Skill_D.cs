@@ -8,7 +8,7 @@ public class Player_Skill_D : MonoBehaviour
     public GameObject A_Clone;
     private float speed, angle;
 
-    private float time, _size, _upSizeTime;
+    private float time, _time, _size, _upSizeTime;
     private bool canShoot;
     Vector3 originSize;
 
@@ -19,6 +19,7 @@ public class Player_Skill_D : MonoBehaviour
         speed = 10f;
         angle = 0;
         time = -3;
+        _time = -3;
         _size = 2;
         _upSizeTime = 0.2f;
         canShoot = false;
@@ -35,7 +36,9 @@ public class Player_Skill_D : MonoBehaviour
             transform.rotation = Quaternion.identity;   // 각도 초기화
 
             // 3초 후 바운스
-            if (time > 0)
+            if (time <= 0)
+                transform.localScale = originSize * (1f + time / 4);
+            else
             {
                 canShoot = true;
                 if (time <= _upSizeTime)
@@ -48,11 +51,12 @@ public class Player_Skill_D : MonoBehaviour
                     time = 0;
                 }
             }
-            else
-            {
-                transform.localScale = originSize * (1f + time / 4);
-            }
+
+            if (_time >= 5)
+                Destroy(gameObject);
+
             time += Time.deltaTime;
+            _time += Time.deltaTime;
         }
         
     }
