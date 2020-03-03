@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,6 +28,12 @@ public class UIManager : MonoBehaviour
     public void OnContinueBtnClick()
     {
         PanelSwitch();
+    }
+    public void OnHomeBtnClick()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.gameState = GameState.Over;
+        GameManager.instance.GameOver();
     }
 
     private void PanelSwitch()

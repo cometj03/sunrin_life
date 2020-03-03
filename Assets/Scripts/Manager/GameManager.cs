@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         if (curtain == null)
             curtain = GameObject.Find("curtain");
-        while (time < 1.5f)
+        while (time < 1.25f)
         {
             curtain.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, time / 1.5f);
             time += Time.deltaTime;
