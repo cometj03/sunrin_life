@@ -18,8 +18,8 @@ public class Player_Skill_D : MonoBehaviour
             Player = GameObject.Find("Player");
         speed = 10f;
         angle = 0;
-        time = -3;
-        _time = -3;
+        time = -2;
+        _time = -2;
         _size = 2;
         _upSizeTime = 0.2f;
         canShoot = false;
@@ -68,7 +68,7 @@ public class Player_Skill_D : MonoBehaviour
             Destroy(collision.gameObject);
             // Arrow_angle 값 받아오기
             angle = Player.GetComponent<ArrowRotation>().Arrow_angle;
-            for (float i = -20; i <= 20; i += 20)
+            for (float i = -15; i <= 15; i += 10)
                 Instantiate(A_Clone, transform.position, Quaternion.Euler(0, 0, angle + i));
             Destroy(gameObject);
             

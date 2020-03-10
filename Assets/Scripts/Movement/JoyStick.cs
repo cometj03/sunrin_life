@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Transform Stick; // 조이스틱
-    public Vector2 JoyVec;  // 조이스틱의 방향 (단위 벡터)
+    public Vector2 JoyVec;  // 조이스틱의 방향
 
     private Vector2 StickFirstPos;
     private Vector2 currentPos;

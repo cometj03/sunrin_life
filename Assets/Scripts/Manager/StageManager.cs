@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -16,7 +15,6 @@ public class StageManager : MonoBehaviour
         numStage = 0;
         _numStage = 3;
         openedPanel = false;
-        //DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -24,7 +22,7 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
             stages[i].SetActive(false);
         stages[numStage].SetActive(true);
-        if (GameManager.instance.stageScene == Stage.StartScene)
+        if (GameManager.instance.stageScene == CurruntScene.StageScene)
             StartPanel.SetActive(true);
         else
             StartPanel.SetActive(false);
@@ -33,21 +31,21 @@ public class StageManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.stageScene == Stage.StartScene)
+        if (GameManager.instance.stageScene == CurruntScene.StageScene)
         {
             if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
             {
                 StartPanel.SetActive(false);
                 CloseAlertPanel();
                 GameManager.instance._FadeOut();
-                GameManager.instance.stageScene = Stage.inMenu;
+                GameManager.instance.stageScene = CurruntScene.inMenu;
             }
             else if (Application.platform == RuntimePlatform.Android && Input.GetKeyDown(KeyCode.Escape))
             {
                 GameQuit();
             }
         }
-        else if (GameManager.instance.stageScene == Stage.inMenu)
+        else if (GameManager.instance.stageScene == CurruntScene.inMenu)
         {
             StartPanel.SetActive(false);
             if (Application.platform == RuntimePlatform.Android && Input.GetKeyDown(KeyCode.Escape))
@@ -142,16 +140,10 @@ public class StageManager : MonoBehaviour
     public void GotoStart() // 초기화면으로 돌아가기
     {
         StartPanel.SetActive(true);
-        GameManager.instance.stageScene = Stage.StartScene;
+        GameManager.instance.stageScene = CurruntScene.StageScene;
     }
     public void GameQuit()  // 게임 종료
     {
         Application.Quit();
-    }
-
-    public void GotoInGame()
-    {
-        GameManager.instance.gameState = GameState.Progressing;
-        SceneManager.LoadScene("InGame");
     }
 }

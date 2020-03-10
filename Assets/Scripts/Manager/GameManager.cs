@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Stage
+public enum CurruntScene
 {
-    StartScene,
+    StageScene,
     inMenu
 }
 public enum GameState
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameState gameState;
-    public Stage stageScene;
+    public CurruntScene stageScene;
 
     public GameObject curtain;
     public float time, _fadeTime;
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
         time = 0f;
         _fadeTime = 1f;
-        stageScene = Stage.StartScene;
+        stageScene = CurruntScene.StageScene;
     }
 
     private void Start()

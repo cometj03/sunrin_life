@@ -19,7 +19,7 @@ public class Enemy_Skill_A : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-12f);
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-10f);
             Destroy(gameObject);
         }
         if (collision.tag == "Wall")
@@ -28,7 +28,7 @@ public class Enemy_Skill_A : MonoBehaviour
         }
         if (collision.tag == "Shield")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(18f);
+            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(20f);
             Destroy(gameObject);
         }
     }

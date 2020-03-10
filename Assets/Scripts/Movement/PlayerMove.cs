@@ -26,8 +26,13 @@ public class PlayerMove : MonoBehaviour
         dir = 0;
 
         anim = transform.GetComponent<Animator>();
-        isJoyStick = true;
         dir = -1;
+
+#if     UNITY_EDITOR
+        isJoyStick = false;
+#elif   UNITY_ANDROID
+        isJoyStick = true;
+#endif
     }
 
     void Update()
