@@ -14,7 +14,7 @@ public class EnemyMove : MonoBehaviour
     float speed;
 
     Animator anim;
-    float cool_a, coolTimer;
+    float cool_a, coolTimer_a;
     
     void Awake()
     {
@@ -28,7 +28,7 @@ public class EnemyMove : MonoBehaviour
         anim = transform.GetComponent<Animator>();
 
         cool_a = Random.Range(1.0f, 6.0f);
-        coolTimer = 0f;
+        coolTimer_a = 0f;
     }
 
     void Update()
@@ -76,9 +76,9 @@ public class EnemyMove : MonoBehaviour
         transform.Translate(moveVector * speed * Time.deltaTime);
 
         // 스킬 발사 코드
-        if (coolTimer < cool_a)
+        if (coolTimer_a < cool_a)
         {
-            coolTimer += Time.deltaTime;
+            coolTimer_a += Time.deltaTime;
         }
         else if (GameManager.instance.gameState == GameState.Progressing)
         {
@@ -91,7 +91,7 @@ public class EnemyMove : MonoBehaviour
             Enemy_Spawn_A(pos, angle + Random.Range(-10.0f, 25.0f) * dir);
 
             cool_a = Random.Range(2.5f, 7.0f);
-            coolTimer = 0f;
+            coolTimer_a = 0f;
         }
     }
 
