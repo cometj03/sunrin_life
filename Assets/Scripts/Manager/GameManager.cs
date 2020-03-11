@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        //DontDestroyOnLoad(gameObject);
         time = 0f;
         _fadeTime = 1f;
         stageScene = CurruntScene.StageScene;
@@ -38,9 +37,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        /*GameObject[] gm = GameObject.FindGameObjectsWithTag("GameManager");
-        for (int i = 1; gm[i] != null; i++)
-            Destroy(gm[i]);*/
         if (SceneManager.GetActiveScene().name == "InGame")
             gameState = GameState.Progressing;
     }
@@ -56,13 +52,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        gameState = GameState.Over;
         _FadeIn();
     }
 
     public void GameClear()
     {
-        gameState = GameState.Clear;
         _FadeIn();
     }
 

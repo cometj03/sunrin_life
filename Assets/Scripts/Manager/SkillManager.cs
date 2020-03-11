@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SkillManager : MonoBehaviour
 {
-    public GameObject Player;
+    public GameObject Player, PlayerAfterImg;
     public GameObject Player_Skill_A;
     public GameObject Player_Skill_B;
     public GameObject Player_Skill_D;
@@ -21,10 +21,14 @@ public class SkillManager : MonoBehaviour
 
     Quaternion rotation;
 
+    PlayerMove playerMove;
+
     void Awake()
     {
         if (Player == null)
             Player = GameObject.Find("Player");
+        if (playerMove == null)
+            playerMove = Player.GetComponent<PlayerMove>();
         playerMoveable = true;
         arrowMoveable = true;
 
@@ -81,7 +85,8 @@ public class SkillManager : MonoBehaviour
         {
             if (shot_c || Input.GetKeyDown(KeyCode.E))
             {
-                Player.GetComponent<PlayerMove>().Flash();
+                StartCoroutine(Player_Flash());
+                
                 time_c = cool_c;
             }
             buttonC.image.fillAmount = 1;
@@ -150,6 +155,15 @@ public class SkillManager : MonoBehaviour
         Vector2 pos = Player.transform.position;
         pos.y += 1.5f;
         Instantiate(Player_Skill_D, pos, Quaternion.Euler(0, 0, angle));
+    }
+    IEnumerator Player_Flash()
+    {
+        GameObject afterImg = Instantiate(PlayerAfterImg, Player.transform.position, Quaternion.Euler(0, 0, 0));
+        afterImg.transform.localScale = new Vector3(-0.22f * playerMove.dir, 0.22f, 1);
+        Destroy(afterImg, 1.5f);
+        StartCoroutine(Pause(0.1f));
+        yield return new WaitForSeconds(0.1f);
+        playerMove.Flash();
     }
     
     // pause moving

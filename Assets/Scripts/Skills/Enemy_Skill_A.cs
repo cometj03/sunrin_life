@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class Enemy_Skill_A : MonoBehaviour
 {
-    private float speed;
-    void Awake()
+    private float speed, damage;
+    int difficulty;
+    HPManager hpManager;
+
+    void Start()
     {
+        if (hpManager == null)
+            hpManager = GameObject.Find("HP Gauge").GetComponent<HPManager>();
         speed = 12f;
+        difficulty = (int)DataManager.instance.currentStage;
+        damage = (difficulty + 2) * 4;
     }
 
     void Update()
@@ -19,7 +26,7 @@ public class Enemy_Skill_A : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-10f);
+            hpManager.PlusHP(-damage);
             Destroy(gameObject);
         }
         if (collision.tag == "Wall")
@@ -28,7 +35,7 @@ public class Enemy_Skill_A : MonoBehaviour
         }
         if (collision.tag == "Shield")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(20f);
+            hpManager.PlusHP(20f - difficulty * 2);
             Destroy(gameObject);
         }
     }

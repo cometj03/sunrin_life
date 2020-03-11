@@ -6,14 +6,19 @@ public class Player_Skill_A : MonoBehaviour
 {
     public GameObject Particle_A;
     GameObject Player;
-    private float speed, angle;
+    private float speed, angle, difficulty;
 
-    void Awake()
+    HPManager hpManager;
+
+    void Start()
     {
         if (Player == null)
             Player = GameObject.Find("Player");
+        if (hpManager == null)
+            hpManager = GameObject.Find("HP Gauge").GetComponent<HPManager>();
         speed = 12f;
         angle = 0f;
+        difficulty = (int)DataManager.instance.currentStage;
     }
 
     void Update()
@@ -28,12 +33,11 @@ public class Player_Skill_A : MonoBehaviour
     {
         if (collision.tag == "Wall")
         {
-            //GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(-3f);
             Destroy(gameObject);
         }
         if (collision.tag == "Enemy")
         {
-            GameObject.Find("HP Gauge").GetComponent<HPManager>().PlusHP(10f);
+            hpManager.PlusHP(14f - difficulty * 2);
             Vector2 pos = collision.transform.position;
             pos.y = transform.position.y + 0.5f;
             var clone = Instantiate(Particle_A, pos, Quaternion.Euler(0, 0, angle));

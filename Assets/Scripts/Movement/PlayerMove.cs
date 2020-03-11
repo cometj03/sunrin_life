@@ -15,12 +15,17 @@ public class PlayerMove : MonoBehaviour
 
     Animator anim;
 
+    SkillManager skillMgr;
+
     void Awake()
     {
         if (SkillManager == null)
             SkillManager = GameObject.Find("SkillManager");
         if (JoyStick == null)
             JoyStick = GameObject.Find("JoyStick_BackGround");
+        if (skillMgr == null)
+            skillMgr = SkillManager.GetComponent<SkillManager>();
+
         speed = 4f;
         moveVector = Vector2.zero;
         dir = 0;
@@ -64,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         canMove = GameManager.instance.gameState == GameState.Progressing ? canMove : false;
 
         // 움직일 수 있는지
-        if (canMove && SkillManager.GetComponent<SkillManager>().playerMoveable)
+        if (canMove && skillMgr.playerMoveable)
             transform.Translate(moveVector * speed * Time.deltaTime);
     }
 
@@ -75,11 +80,6 @@ public class PlayerMove : MonoBehaviour
         targetVector = new Vector2(transform.position.x + 4 * dir, transform.position.y);
         if (Mathf.Abs(targetVector.x) > 8)
             targetVector.x = 8 * dir;
-        StartCoroutine("Teleport");
-    }
-    IEnumerator Teleport()
-    {
-        yield return new WaitForSeconds(0.1f);
         transform.position = targetVector;
     }
 }

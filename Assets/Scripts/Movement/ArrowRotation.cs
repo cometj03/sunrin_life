@@ -10,12 +10,17 @@ public class ArrowRotation : MonoBehaviour
     public float angleSpeed;
     bool isLeft;
 
+    SkillManager skillMgr;
+
     void Awake()
     {
         if (Arrow == null)
             Arrow = GameObject.Find("Arrow");
         if (SkillManager == null)
             SkillManager = GameObject.Find("SkillManager");
+        if (skillMgr == null)
+            skillMgr = SkillManager.GetComponent<SkillManager>();
+
         Arrow_angle = 0;
         max = 70f;
         min = -70f;
@@ -37,7 +42,7 @@ public class ArrowRotation : MonoBehaviour
                 isLeft = true;
         }
         // 좌우 움직임
-        if (SkillManager.GetComponent<SkillManager>().arrowMoveable)
+        if (skillMgr.arrowMoveable)
             Arrow_angle += (isLeft ? -1 : 1) * angleSpeed * Time.deltaTime;
         
         Arrow.gameObject.transform.eulerAngles = new Vector3(0, 0, Arrow_angle);
