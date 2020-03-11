@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler//, IPointerDownHandler, IPointerUpHandler
+public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Transform Stick; // 조이스틱
     public Vector2 JoyVec;  // 조이스틱의 방향
@@ -32,10 +32,21 @@ public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler//, IPointer
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
         // < 드래그 중 >
-        currentPos.x = Input.mousePosition.x;
-        
+        float touchPosX = Input.mousePosition.x;
+        if (Input.touches.Length > 1)
+        {
+            // 두 개 이상 터치
+            foreach (Touch touch in Input.touches)
+            {
+                if (touchPosX > touch.position.x)
+                    touchPosX = touch.position.x;
+            }
+        }
+
+        currentPos.x = touchPosX;
+
         JoyVec = (currentPos - StickFirstPos).normalized;
-        
+
         float Dis = Mathf.Abs(currentPos.x - StickFirstPos.x);
 
         if (Dis > Radius)
@@ -50,7 +61,7 @@ public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler//, IPointer
         JoyVec = Vector2.zero;
     }
 
-    /*void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
+    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         // < 터치 시작 >
         currentPos.x = Input.mousePosition.x;
@@ -63,5 +74,5 @@ public class JoyStick : MonoBehaviour, IEndDragHandler, IDragHandler//, IPointer
         // < 터치 뗌 >
         Stick.transform.position = StickFirstPos;
         JoyVec = Vector2.zero;
-    }*/
+    }
 }
