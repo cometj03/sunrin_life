@@ -10,6 +10,8 @@ public class SkillManager : MonoBehaviour
     public GameObject Player_Skill_B;
     public GameObject Player_Skill_D;
 
+    public GameObject[] BackGrounds;
+
     public Button buttonA, buttonB, buttonC, buttonD;
     
     public bool playerMoveable, arrowMoveable;
@@ -34,10 +36,10 @@ public class SkillManager : MonoBehaviour
 
         time_a = time_b = time_c = time_d = 0;
         shot_a = shot_b = shot_c = shot_d = false;
-        cool_a = 1;
-        cool_b = 5.7f;
-        cool_c = 3.7f;
-        cool_d = 8.7f;
+        cool_a = 1.3f;
+        cool_b = 10f;
+        cool_c = 5.7f;
+        cool_d = 8f;
         angle = 0;
     }
 
@@ -52,15 +54,17 @@ public class SkillManager : MonoBehaviour
             if (shot_a || Input.GetKeyDown(KeyCode.Q))
             {
                 Player_Spawn_A();
-                StartCoroutine(Pause(0.2f));
+                StartCoroutine(Pause(0.1f));
                 time_a = cool_a;
             }
             buttonA.image.fillAmount = 1;
+            BackGrounds[0].SetActive(true);
         } else
         {
             time_a -= Time.deltaTime;
             buttonA.image.fillAmount = 1 - time_a / cool_a;
             shot_a = false;
+            BackGrounds[0].SetActive(false);
         }
 
         // 스킬 B 관리
@@ -69,15 +73,17 @@ public class SkillManager : MonoBehaviour
             if (shot_b || Input.GetKeyDown(KeyCode.W))
             {
                 Player_Spawn_B();
-                StartCoroutine(Pause(0.5f));
+                StartCoroutine(Pause(0.1f));
                 time_b = cool_b;
             }
             buttonB.image.fillAmount = 1;
+            BackGrounds[1].SetActive(true);
         } else
         {
             time_b -= Time.deltaTime;
             buttonB.image.fillAmount = 1 - time_b / cool_b;
             shot_b = false;
+            BackGrounds[1].SetActive(false);
         }
 
         // 스킬 C 관리
@@ -90,11 +96,13 @@ public class SkillManager : MonoBehaviour
                 time_c = cool_c;
             }
             buttonC.image.fillAmount = 1;
+            BackGrounds[2].SetActive(true);
         } else
         {
             time_c -= Time.deltaTime;
             buttonC.image.fillAmount = 1 - time_c / cool_c;
             shot_c = false;
+            BackGrounds[2].SetActive(false);
         }
 
         // 스킬 D 관리
@@ -103,15 +111,17 @@ public class SkillManager : MonoBehaviour
             if (shot_d || Input.GetKeyDown(KeyCode.R))
             {
                 Player_Spawn_D();
-                StartCoroutine(Pause(0.2f));
+                StartCoroutine(Pause(0.1f));
                 time_d = cool_d;
             }
             buttonD.image.fillAmount = 1;
+            BackGrounds[3].SetActive(true);
         } else
         {
             time_d -= Time.deltaTime;
             buttonD.image.fillAmount = 1 - time_d / cool_d;
             shot_d = false;
+            BackGrounds[3].SetActive(false);
         }
     }
 

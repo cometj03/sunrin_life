@@ -17,7 +17,7 @@ public class HPManager : MonoBehaviour
         if (HP_Text == null)
             HP_Text = gameObject.GetComponentInChildren<Text>();
         hp = 45f;
-        difficulty = (int)DataManager.instance.currentStage * 2 + 2;
+        difficulty = (int)DataManager.instance.currentStage * 2 + 3;
     }
 
     private void FixedUpdate()

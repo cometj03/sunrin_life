@@ -8,6 +8,7 @@ public class TrumpMove : MonoBehaviour
     GameObject Player;
 
     HPManager hpManager;
+    PlayerMove playerMove;
 
     bool Rainbow;
 
@@ -17,6 +18,8 @@ public class TrumpMove : MonoBehaviour
             Player = GameObject.Find("Player");
         if (hpManager == null)
             hpManager = GameObject.Find("HP Gauge").GetComponent<HPManager>();
+        if (playerMove == null)
+            playerMove = Player.GetComponent<PlayerMove>();
 
         anim = transform.GetComponent<Animator>();
         Rainbow = true;
@@ -25,17 +28,20 @@ public class TrumpMove : MonoBehaviour
     void Update()
     {
         Vector3 target = Player.transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, target, 0.05f);
-        if (transform.position.y <= target.y)
+        //transform.position = Vector3.MoveTowards(transform.position, target, 0.05f);
+        Vector3 velo = Vector3.zero;
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velo, 0.12f);
+        if (transform.position.y <= target.y + 0.7f)
             Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player_Skill_A")
+        if (collision.tag == "Shield")
         {
             anim.SetBool("ColorChange", true);
             Rainbow = false;
+            Destroy(collision.gameObject);
         }
         if (collision.tag == "Player")
         {
@@ -43,10 +49,9 @@ public class TrumpMove : MonoBehaviour
                 hpManager.PlusHP(-15f);
             else
                 hpManager.PlusHP(-5f);
-            Destroy(gameObject);
-        }
-        if (collision.tag == "Shield")
-        {
+
+            // 공포
+            playerMove.flee = -1;
             Destroy(gameObject);
         }
     }

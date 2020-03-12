@@ -5,27 +5,30 @@ using UnityEngine;
 public class EngTEnemy : EnemyMove
 {
     public GameObject Trump;
-    float cool_Trump, coolTimer_Trump;
 
-    private void Awake()
+    private void Start()
     {
-        cool_Trump = Random.Range(4.0f, 8.0f);
-        coolTimer_Trump = 0f;
+        StartCoroutine(TrumpSpawn());
     }
 
-    void Update()
+    IEnumerator TrumpSpawn()
     {
-        if (coolTimer_Trump < cool_Trump)
-            coolTimer_Trump += Time.deltaTime;
-        else if (GameManager.instance.gameState == GameState.Progressing)
-        {
-            Vector2 pos = transform.position;
-            pos.y = 7f;
+        while (GameManager.instance.gameState == GameState.Progressing) {
 
-            Instantiate(Trump, pos, Quaternion.Euler(0, 0, 0));
+            if (coolTimer_Trump < cool_Trump)
+                coolTimer_Trump += Time.deltaTime;
+            else if (GameManager.instance.gameState == GameState.Progressing)
+            {
+                Vector2 pos = transform.position;
+                pos.y = 7f;
 
-            cool_Trump = Random.Range(4.0f, 8.0f);
-            coolTimer_Trump = 0f;
+                Instantiate(Trump, pos, Quaternion.Euler(0, 0, 0));
+
+                cool_Trump = Random.Range(5.5f, 9.5f);
+                coolTimer_Trump = 0f;
+            }
+
+            yield return new WaitForEndOfFrame();
         }
     }
 }

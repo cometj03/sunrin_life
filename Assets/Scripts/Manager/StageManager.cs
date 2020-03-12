@@ -67,6 +67,7 @@ public class StageManager : MonoBehaviour
         stages[_numStage].SetActive(true);
 
         // 포지션 초기화
+        float posX = stages[numStage].transform.position.x;
         stages[numStage].transform.position = new Vector2(17 * n, 0);
     }
 
@@ -110,7 +111,6 @@ public class StageManager : MonoBehaviour
     }
     IEnumerator StageLeave(int tmp) // 스테이지 퇴장
     {
-        //Vector3 pos = Vector3.zero;
         Vector3 pos = stages[_numStage].transform.position;
         Vector3 target = Vector3.zero;
         target.x = -17 * tmp;
@@ -120,7 +120,6 @@ public class StageManager : MonoBehaviour
         {
             stages[_numStage].transform.position = pos;
             pos = Vector3.Lerp(pos, target, Time.deltaTime * (time + 1.5f));
-            //stages[_numStage].transform.position = Vector3.Lerp(stages[_numStage].transform.position, target, Time.deltaTime * (time + 1));
             time += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }

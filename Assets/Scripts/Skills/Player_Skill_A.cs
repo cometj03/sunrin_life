@@ -44,5 +44,10 @@ public class Player_Skill_A : MonoBehaviour
             Destroy(clone, 1.0f);
             Destroy(gameObject);
         }
+        if (collision.tag == "Monster")
+        {
+            hpManager.PlusHP(3f);
+            Destroy(gameObject);
+        }
     }
 }

@@ -15,7 +15,10 @@ public class EnemyMove : MonoBehaviour
 
     Animator anim;
     float cool_a, coolTimer_a;
-    
+
+    // EngTEnemy.cs
+    protected float cool_Trump, coolTimer_Trump;
+
     void Awake()
     {
         if (Player == null)
@@ -29,6 +32,10 @@ public class EnemyMove : MonoBehaviour
 
         cool_a = Random.Range(1.0f, 6.0f);
         coolTimer_a = 0f;
+
+        // EngTEnemy.cs
+        cool_Trump = Random.Range(5.5f, 9.5f);
+        coolTimer_Trump = 0f;
     }
 
     void Update()

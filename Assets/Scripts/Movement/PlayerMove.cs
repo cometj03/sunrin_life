@@ -13,6 +13,10 @@ public class PlayerMove : MonoBehaviour
     // 바라보고 있는 방향 (1 : right, -1 : left)
     public float dir;
 
+    // 공포 (-1 : true, 1 : false)
+    public int flee;
+    float fleeTime;
+
     Animator anim;
 
     SkillManager skillMgr;
@@ -32,6 +36,8 @@ public class PlayerMove : MonoBehaviour
 
         anim = transform.GetComponent<Animator>();
         dir = -1;
+        flee = 1;
+        fleeTime = 0;
 
 #if     UNITY_EDITOR
         isJoyStick = false;
@@ -48,6 +54,17 @@ public class PlayerMove : MonoBehaviour
         else
             h = Input.GetAxisRaw("Horizontal");
         float PlayerX = transform.position.x;
+
+        // 공포
+        if (flee < 0)
+        {
+            if (fleeTime <= 1.5f)
+                fleeTime += Time.deltaTime;
+            else
+                flee = 1;
+        }
+        h *= flee;
+
         canMove = true;
         moveVector.x = h;
         

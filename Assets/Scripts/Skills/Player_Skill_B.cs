@@ -14,7 +14,7 @@ public class Player_Skill_B : MonoBehaviour
             Player = GameObject.Find("Player");
         ps = GetComponentInChildren<ParticleSystem>();
 
-        speed = 7f;
+        speed = 8.5f;
     }
 
     void Update()

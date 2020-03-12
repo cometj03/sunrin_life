@@ -153,6 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be27fbd9dc924e74d92db3dda8d402c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy_Skill_A: {fileID: 6332388350340300168, guid: df79389177a6368429fc848edd954056,
+  Enemy_Skill_A: {fileID: 4337188521177136319, guid: 87d2ad07d8173144b99ae48a5f107ed2,
     type: 3}
   Trump: {fileID: 9029814644884031986, guid: 7d2d68b10dfbc264d8a48788e899056d, type: 3}

@@ -10,6 +10,7 @@ TagManager:
   - EnemySkill
   - Shield
   - Player_Skill_A
+  - Monster
   layers:
   - Default
   - TransparentFX
