@@ -58,10 +58,13 @@ public class PlayerMove : MonoBehaviour
         // 공포
         if (flee < 0)
         {
-            if (fleeTime <= 1.5f)
+            if (fleeTime <= 1.7f)
                 fleeTime += Time.deltaTime;
             else
+            {
                 flee = 1;
+                fleeTime = 0;
+            }
         }
         h *= flee;
 

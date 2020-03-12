@@ -30,29 +30,43 @@ public class TrumpMove : MonoBehaviour
         Vector3 target = Player.transform.position;
         //transform.position = Vector3.MoveTowards(transform.position, target, 0.05f);
         Vector3 velo = Vector3.zero;
-        transform.position = Vector3.SmoothDamp(transform.position, target, ref velo, 0.12f);
-        if (transform.position.y <= target.y + 0.7f)
+        transform.position = Vector3.SmoothDamp(transform.position, target, ref velo, 0.15f);
+        if (transform.position.y <= target.y + 0.8f)
             Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Shield")
+        if (collision.tag == "Player_Skill_A")
         {
-            anim.SetBool("ColorChange", true);
-            Rainbow = false;
-            Destroy(collision.gameObject);
+            if (Rainbow)
+            {
+                anim.SetBool("ColorChange", true);
+                Rainbow = false;
+            }
+            else
+                Destroy(gameObject);
         }
         if (collision.tag == "Player")
         {
             if (Rainbow)
                 hpManager.PlusHP(-15f);
-            else
-                hpManager.PlusHP(-5f);
 
             // 공포
             playerMove.flee = -1;
             Destroy(gameObject);
+        }
+        if (collision.tag == "Shield")
+        {
+            if (Rainbow)
+            {
+                anim.SetBool("ColorChange", true);
+                Rainbow = false;
+            }
+            else
+                Destroy(gameObject);
+
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -37,9 +37,9 @@ public class SkillManager : MonoBehaviour
         time_a = time_b = time_c = time_d = 0;
         shot_a = shot_b = shot_c = shot_d = false;
         cool_a = 1.3f;
-        cool_b = 10f;
+        cool_b = 7f;
         cool_c = 5.7f;
-        cool_d = 8f;
+        cool_d = 6.7f;
         angle = 0;
     }
 
@@ -92,7 +92,6 @@ public class SkillManager : MonoBehaviour
             if (shot_c || Input.GetKeyDown(KeyCode.E))
             {
                 StartCoroutine(Player_Flash());
-                
                 time_c = cool_c;
             }
             buttonC.image.fillAmount = 1;
@@ -172,8 +171,8 @@ public class SkillManager : MonoBehaviour
         afterImg.transform.localScale = new Vector3(-0.22f * playerMove.dir, 0.22f, 1);
         Destroy(afterImg, 1.5f);
         StartCoroutine(Pause(0.1f));
-        yield return new WaitForSeconds(0.1f);
         playerMove.Flash();
+        yield return new WaitForSeconds(0.1f);
     }
     
     // pause moving
