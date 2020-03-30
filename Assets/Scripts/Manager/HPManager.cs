@@ -20,17 +20,17 @@ public class HPManager : MonoBehaviour
         difficulty = (int)DataManager.instance.currentStage * 2 + 3;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         HP_Gauge.fillAmount = hp / 100;
         speed = difficulty * hp / 100;
-        if (hp >= 0)
-        {
-            hp -= Time.deltaTime * speed;
-        }
+        
         if (GameManager.instance.gameState == GameState.Progressing)
         {
-
+            if (hp >= 0)
+            {
+                hp -= Time.deltaTime * speed;
+            }
             HP_Text.text = hp.ToString("N0") + "%";
         }
     }
